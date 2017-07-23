@@ -1,0 +1,14 @@
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.Samples.exe
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.Samples.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.exe
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.Samples.exe
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.Samples.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.exe
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.pdb

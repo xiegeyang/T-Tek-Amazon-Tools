@@ -1,0 +1,10 @@
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\bin\Debug\MarketplaceWebServiceOrders.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\bin\Debug\MWSClientCsRuntime-1.0.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\bin\Debug\MWSOrders_2013-09-01_v2017-02-22.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\obj\Debug\MarketplaceWebServiceOrders.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\obj\Debug\MarketplaceWebServiceOrders.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\bin\Debug\MarketplaceWebServiceOrders.dll.config
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\bin\Debug\MarketplaceWebServiceOrders.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\obj\Debug\MarketplaceWebServiceOrders.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\bin\Debug\DataExchangeService.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebServiceOrders\bin\Debug\DataExchangeService.pdb

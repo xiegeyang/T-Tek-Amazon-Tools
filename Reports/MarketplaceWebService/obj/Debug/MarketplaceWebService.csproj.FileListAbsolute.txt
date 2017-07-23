@@ -1,0 +1,9 @@
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService\bin\Debug\MarketplaceWebService.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService\bin\Debug\MarketplaceWebService.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService\obj\Debug\MarketplaceWebService.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Seller Tools\MarketplaceWebService\obj\Debug\MarketplaceWebService.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService\bin\Debug\MarketplaceWebService.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService\bin\Debug\MarketplaceWebService.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService\obj\Debug\MarketplaceWebService.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService\obj\Debug\MarketplaceWebService.pdb
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\MarketplaceWebService\obj\Debug\MarketplaceWebService.csprojResolveAssemblyReference.cache
