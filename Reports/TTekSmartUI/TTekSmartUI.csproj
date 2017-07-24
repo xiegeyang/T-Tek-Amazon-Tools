@@ -32,14 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataExchangeService">
+    <Reference Include="DataExchangeService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DataExchangeService\bin\Debug\DataExchangeService.dll</HintPath>
     </Reference>
-    <Reference Include="MarketplaceWebServiceOrders">
-      <HintPath>..\MarketplaceWebServiceOrders\bin\Debug\MarketplaceWebServiceOrders.dll</HintPath>
-    </Reference>
-    <Reference Include="MWSClientCsRuntime-1.0">
+    <Reference Include="MWSClientCsRuntime-1.0, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Orders\dist\MWSClientCsRuntime-1.0.dll</HintPath>
+    </Reference>
+    <Reference Include="MWSOrders_2013-09-01_v2017-02-22">
+      <HintPath>..\..\Orders\dist\MWSOrders_2013-09-01_v2017-02-22.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailContextView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmailContextView.Designer.cs">
+      <DependentUpon>EmailContextView.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogInView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +76,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EmailContextView.resx">
+      <DependentUpon>EmailContextView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogInView.resx">
       <DependentUpon>LogInView.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,6 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MarketplaceWebServiceOrders\MarketplaceWebServiceOrders.csproj">
+      <Project>{E100AF18-00B5-4031-9457-BB2CB00D8665}</Project>
+      <Name>MarketplaceWebServiceOrders</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

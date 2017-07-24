@@ -35,7 +35,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataExchangeService">
+    <Reference Include="DataExchangeService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DataExchangeService\bin\Debug\DataExchangeService.dll</HintPath>
     </Reference>
     <Reference Include="MWSClientCsRuntime-1.0">
@@ -57,6 +58,7 @@
     <Compile Include="MarketplaceWebServiceOrders.cs" />
     <Compile Include="MarketplaceWebServiceOrdersClient.cs" />
     <Compile Include="MarketplaceWebServiceOrdersConfig.cs" />
+    <Compile Include="MarketplaceWebServiceOrdersDataAccess.cs" />
     <Compile Include="MarketplaceWebServiceOrdersException.cs" />
     <Compile Include="MarketplaceWebServiceOrdersEntity.cs" />
     <Compile Include="Mock\MarketplaceWebServiceOrdersMock.cs" />

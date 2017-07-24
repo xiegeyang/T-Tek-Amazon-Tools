@@ -36,13 +36,16 @@
             this.xmlTextBox = new System.Windows.Forms.TextBox();
             this.sendEmailsButton = new System.Windows.Forms.Button();
             this.createdBeforeDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emailContextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.homeToolStripMenuItem});
+            this.homeToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1245, 24);
@@ -99,6 +102,7 @@
             this.sendEmailsButton.TabIndex = 5;
             this.sendEmailsButton.Text = "Send Email";
             this.sendEmailsButton.UseVisualStyleBackColor = true;
+            this.sendEmailsButton.Enabled = false;
             this.sendEmailsButton.Click += new System.EventHandler(this.sendEmailsButton_Click);
             // 
             // createdBeforeDateTimePicker
@@ -108,6 +112,21 @@
             this.createdBeforeDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.createdBeforeDateTimePicker.TabIndex = 6;
             this.createdBeforeDateTimePicker.ValueChanged += new System.EventHandler(this.createdBeforeDateTimePicker_ValueChanged);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.emailContextToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // emailContextToolStripMenuItem
+            // 
+            this.emailContextToolStripMenuItem.Name = "emailContextToolStripMenuItem";
+            this.emailContextToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.emailContextToolStripMenuItem.Text = "Email Context";
+            this.emailContextToolStripMenuItem.Click += new System.EventHandler(this.emailContextToolStripMenuItem_Click);
             // 
             // MainUIView
             // 
@@ -140,6 +159,8 @@
         private System.Windows.Forms.TextBox xmlTextBox;
         private System.Windows.Forms.Button sendEmailsButton;
         private System.Windows.Forms.DateTimePicker createdBeforeDateTimePicker;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem emailContextToolStripMenuItem;
     }
 }
 

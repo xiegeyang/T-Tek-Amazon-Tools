@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Mail;
 using System.Windows.Forms;
-using System.Xml;
 using DataExchangeService;
 using MarketplaceWebServiceOrders;
-using MarketplaceWebServiceOrders.Model;
 
 namespace TTekSmartUI
 {
@@ -15,7 +10,7 @@ namespace TTekSmartUI
         private ServiceCliamDefinition _serviceCliamDefinition;
         DateTime _createdAfterDateTime;
         DateTime _createdBeforeDateTime;
-        private List<string> _emailCollection;
+        private OrderCollection _orderCollection;
 
 
 
@@ -44,53 +39,24 @@ namespace TTekSmartUI
 
         private void getOrdersListButton_Click(object sender, System.EventArgs e)
         {
-            IMWSResponse listOrdersResponse = null;
-            listOrdersResponse = MarketplaceWebServiceOrdersEntity.InvokeListOrdersByDateTime(_serviceCliamDefinition, _createdAfterDateTime, _createdBeforeDateTime);
-            ResponseHeaderMetadata rhmd = listOrdersResponse.ResponseHeaderMetadata;
-            string responseXml = listOrdersResponse.ToXML();
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.LoadXml(responseXml);
-            XmlNodeList emailList = xDoc.GetElementsByTagName("BuyerEmail");
+            _orderCollection = MarketplaceWebServiceOrdersDataAccess.InvokeListOrdersDetailByDateTime(_serviceCliamDefinition, _createdAfterDateTime, _createdBeforeDateTime);
 
-            if (_emailCollection == null)
+            foreach (Order order in _orderCollection)
             {
-                _emailCollection = new List<string>();
+                xmlTextBox.Text += "   \n" + order.OrderId + "  " + order.Email + "   " + order.Item.ASIN + "   " + order.Item.Title + "   "
+                    + order.Name;
             }
-            foreach (XmlNode email in emailList)
-            {
-                xmlTextBox.Text += "\n";
-                xmlTextBox.Text += email.InnerText;
-                xmlTextBox.Text += "\n    ";
-                _emailCollection.Add(email.InnerText);
-            }
+            sendEmailsButton.Enabled = true;
             MessageBox.Show("OK!");
         }
 
         private void sendEmailsButton_Click(object sender, EventArgs e)
         {
-            MailAddress fromAddress = new MailAddress("xiegeyang@t-tekproduct.com", "T-Tek Product Team");
-            MailAddress toAddress = new MailAddress("5ktg4qglw5598s3@marketplace.amazon.com", "Customer");
-            string fromPassword = "X199241gy";
-            string subject = "Need Review";
-            string body = "Need Your Review";
+            EmailService.SendEmail(_orderCollection);
+        }
 
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            })
-            {
-                smtp.Send(message);
-            }
+        private void emailContextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
 
