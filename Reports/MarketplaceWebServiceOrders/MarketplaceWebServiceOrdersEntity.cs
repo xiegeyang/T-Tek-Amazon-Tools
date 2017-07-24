@@ -76,16 +76,16 @@ namespace MarketplaceWebServiceOrders
 
 
 
-        public GetOrderResponse InvokeGetOrder()
+        public GetOrderResponse InvokeGetOrder(ServiceCliamDefinition serviceCliamDefinition, string orderId)
         {
             // Create a request.
             GetOrderRequest request = new GetOrderRequest();
-            string sellerId = "A380610PV1XE6A";
-            request.SellerId = sellerId;
-            string mwsAuthToken = "amzn.mws.76aeb40f-2625-ef1b-7942-f41976b59227";
-            request.MWSAuthToken = mwsAuthToken;
+
+            request.SellerId = serviceCliamDefinition.SellerId;
+
+            request.MWSAuthToken = serviceCliamDefinition.AuthToken;
             List<string> amazonOrderId = new List<string>();
-            amazonOrderId.Add("113-0731456-5525002");
+            amazonOrderId.Add(orderId);
             request.AmazonOrderId = amazonOrderId;
             return client.GetOrder(request);
         }
@@ -101,17 +101,17 @@ namespace MarketplaceWebServiceOrders
             return client.GetServiceStatus(request);
         }
 
-        public ListOrderItemsResponse InvokeListOrderItems()
+        public static ListOrderItemsResponse InvokeListOrderItems(ServiceCliamDefinition serviceCliamDefinition, string orderId)
         {
             // Create a request.
             ListOrderItemsRequest request = new ListOrderItemsRequest();
-            string sellerId = "example";
-            request.SellerId = sellerId;
-            string mwsAuthToken = "example";
-            request.MWSAuthToken = mwsAuthToken;
-            string amazonOrderId = "example";
-            request.AmazonOrderId = amazonOrderId;
-            return client.ListOrderItems(request);
+
+            request.SellerId = serviceCliamDefinition.SellerId;
+
+            request.MWSAuthToken = serviceCliamDefinition.AuthToken;
+
+            request.AmazonOrderId = orderId;
+            return GetClient(serviceCliamDefinition).ListOrderItems(request);
         }
 
         public ListOrderItemsByNextTokenResponse InvokeListOrderItemsByNextToken()
@@ -200,6 +200,6 @@ namespace MarketplaceWebServiceOrders
             return client.ListOrdersByNextToken(request);
         }
 
-
+        
     }
 }
