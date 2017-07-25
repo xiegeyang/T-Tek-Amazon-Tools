@@ -49,6 +49,7 @@
             this.bodyTextBox.Name = "bodyTextBox";
             this.bodyTextBox.Size = new System.Drawing.Size(1062, 526);
             this.bodyTextBox.TabIndex = 0;
+            this.bodyTextBox.Enabled = false;
             // 
             // saveContextButton
             // 
@@ -75,6 +76,7 @@
             this.subjectTextBox.Name = "subjectTextBox";
             this.subjectTextBox.Size = new System.Drawing.Size(246, 20);
             this.subjectTextBox.TabIndex = 3;
+            this.subjectTextBox.Text = "{0} did recent purchases from Amazon meet your expectations?";
             // 
             // toEmailAddressTextBox
             // 

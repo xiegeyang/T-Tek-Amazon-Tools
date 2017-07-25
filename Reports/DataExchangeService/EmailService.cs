@@ -7,7 +7,7 @@ namespace DataExchangeService
 {
     public class EmailService
     {
-        private const string _htmlLogo = "<img src=\"cid:{0}\" height=\"100\" width=\"400\" />";
+        private const string _htmlLogo = "<img src=\"https://github.com/xiegeyang/T-Tek-Amazon-Tools/blob/master/Reports/TTekSmartUI/bin/Debug/logo.jpg?raw=true\" height=\"100\" width=\"400\" />";
         private const string _htmlMainBody =
             "<br /><br />"
             + "<p><b>Dear Customer,</b>"
@@ -19,21 +19,21 @@ namespace DataExchangeService
             + "<table>"
             + "<tr>"
             + "<td>Please leave your product review here:</td>"
-            + "<td><a href=\"https://www.amazon.com/review/create-review?asin={0}#\"><img src=\"cid:{1}\" height=\"50\" width=\"172\" /></a></td>"
+            + "<td><a href=\"https://www.amazon.com/review/create-review?asin={0}#\"><img src=\"https://raw.githubusercontent.com/xiegeyang/T-Tek-Amazon-Tools/master/Reports/TTekSmartUI/bin/Debug/reviewstar.png\" height=\"50\" width=\"172\" /></a></td>"
             + "</tr>"
             + "</table>"
             + "<br /><br />"
             + "<table>"
             + "<tr>"
-            + "<td><img src=\"cid:{2}\" height=\"150\" width=\"150\" style=\"float:left\" /></td>"
+            + "<td><img src=\"https://github.com/xiegeyang/T-Tek-Amazon-Tools/blob/master/Reports/TTekSmartUI/bin/Debug/fidgetcube.jpg?raw=true\" height=\"150\" width=\"150\" style=\"float:left\" /></td>"
             + "<td></td><td></td><td></td>"
-            + "<td>{3}</td>"
+            + "<td>{1}</td>"
             + "</tr>"
             + "</table>"
             + "<br /><br />"
             + "If you have any issues with your purchase, please contact us first before leaving the review. We're happy to help!"
             + "<br /><br />"
-            + "<a href=\"https://www.amazon.com/ss/help/contact/?_encoding=UTF8&orderID={4}&sellerID={5}\">Contact Seller</a>"
+            + "<a href=\"https://www.amazon.com/ss/help/contact/?_encoding=UTF8&orderID={2}&sellerID={3}\">Contact Seller</a>"
             + "<br /><br />"
             + "Sincerely, <br />"
             + "Customer Support Team <br />"
@@ -84,26 +84,19 @@ namespace DataExchangeService
             EmailContextInformation emailContextInformation = new EmailContextInformation();
             MailAddress fromAddress = new MailAddress(emailContextInformation.EmailAddress, "T-Tek Product Team");
             MailAddress toAddress = new MailAddress(toEmailAddress, "Customer");
-            string subject = String.Format(emailSubject, "T-Tek Fidget Cube");
+            string subject = String.Format(emailSubject, "xiegeyang");
 
             string fromPassword = emailContextInformation.Password;
 
 
-            LinkedResource logoImage = new LinkedResource("logo.jpg");
-            logoImage.ContentId = Guid.NewGuid().ToString();
-            string headerLogo = String.Format(_htmlLogo, logoImage.ContentId);
 
-            LinkedResource reviewStarImage = new LinkedResource("reviewstar.png");
-            reviewStarImage.ContentId = Guid.NewGuid().ToString();
-            LinkedResource itemImage = new LinkedResource("unnamed.jpg");
-            itemImage.ContentId = Guid.NewGuid().ToString();
-            string mainBody = String.Format(_htmlMainBody, "B06W2HZQ86", reviewStarImage.ContentId, itemImage.ContentId, "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy", "103-7133341-8905855", "A380610PV1XE6A");
+            string headerLogo = String.Format(_htmlLogo);
+
+
+            string mainBody = String.Format(_htmlMainBody, "B06W2HZQ86", "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy", "103-7133341-8905855", "A380610PV1XE6A");
 
             string htmlBody = headerLogo + mainBody;
             AlternateView avHtml = AlternateView.CreateAlternateViewFromString(htmlBody, null, MediaTypeNames.Text.Html);
-            avHtml.LinkedResources.Add(logoImage);
-            avHtml.LinkedResources.Add(reviewStarImage);
-            avHtml.LinkedResources.Add(itemImage);
 
 
             var smtp = new SmtpClient
@@ -123,6 +116,7 @@ namespace DataExchangeService
                 Subject = subject,
             })
             {
+
                 mail.AlternateViews.Add(avHtml);
                 mail.IsBodyHtml = true;
                 smtp.Send(mail);
