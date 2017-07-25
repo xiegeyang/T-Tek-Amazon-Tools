@@ -52,12 +52,13 @@ namespace TTekSmartUI
 
         private void sendEmailsButton_Click(object sender, EventArgs e)
         {
-            EmailService.SendEmail(_orderCollection);
+            EmailService.SendEmailByOrderCollection(_orderCollection);
         }
 
         private void emailContextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            EmailContextView emailContextView = new EmailContextView(_serviceCliamDefinition);
+            emailContextView.ShowDialog();
         }
 
 
