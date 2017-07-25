@@ -50,6 +50,37 @@
             this.bodyTextBox.Size = new System.Drawing.Size(1062, 526);
             this.bodyTextBox.TabIndex = 0;
             this.bodyTextBox.Enabled = false;
+            this.bodyTextBox.Text = " <img src=\"https://github.com/xiegeyang/T-Tek-Amazon-Tools/blob/master/Reports/TTekSmartUI/bin/Debug/logo.jpg?raw=true\" height=\"100\" width=\"400\" />"
+            + "<br /><br />"
+            + "<p><b>Dear Customer,</b>"
+            + "<br /><br />"
+            + "Thank you for puchasing T-Tek products on Amazon.com. We strive to offer you the best value and service possible."
+            + "<br /><br />"
+            + "<b>Got 2 minutes?</b>"
+            + "<br />"
+            + "<table>"
+            + "<tr>"
+            + "<td>Please leave your product review here:</td>"
+            + "<td><a href=\"https://www.amazon.com/review/create-review?asin={0}#\"><img src=\"https://raw.githubusercontent.com/xiegeyang/T-Tek-Amazon-Tools/master/Reports/TTekSmartUI/bin/Debug/reviewstar.png\" height=\"50\" width=\"172\" /></a></td>"
+            + "</tr>"
+            + "</table>"
+            + "<br /><br />"
+            + "<table>"
+            + "<tr>"
+            + "<td><img src=\"https://github.com/xiegeyang/T-Tek-Amazon-Tools/blob/master/Reports/TTekSmartUI/bin/Debug/fidgetcube.jpg?raw=true\" height=\"150\" width=\"150\" style=\"float:left\" /></td>"
+            + "<td></td><td></td><td></td>"
+            + "<td>{1}</td>"
+            + "</tr>"
+            + "</table>"
+            + "<br /><br />"
+            + "If you have any issues with your purchase, please contact us first before leaving the review. We're happy to help!"
+            + "<br /><br />"
+            + "<a href=\"https://www.amazon.com/ss/help/contact/?_encoding=UTF8&orderID={2}&sellerID={3}\">Contact Seller</a>"
+            + "<br /><br />"
+            + "Sincerely, <br />"
+            + "Customer Support Team <br />"
+            + "T-Tek Customer Support <br /></p>";
+            this.bodyTextBox.Enabled = false;
             // 
             // saveContextButton
             // 

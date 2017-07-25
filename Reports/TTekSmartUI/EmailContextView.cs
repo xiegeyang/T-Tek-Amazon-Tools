@@ -26,7 +26,7 @@ namespace TTekSmartUI
                 return;
             }
 
-            EmailService.SendEmailByCustomizeEmail(toEmailAddressTextBox.Text, subjectTextBox.Text, bodyTextBox.Text);
+            EmailService.SendEmailByCustomizeEmail(_serviceCliamDefinition ,toEmailAddressTextBox.Text, subjectTextBox.Text, bodyTextBox.Text);
         }
     }
 }

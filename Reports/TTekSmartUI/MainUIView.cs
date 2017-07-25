@@ -52,7 +52,26 @@ namespace TTekSmartUI
 
         private void sendEmailsButton_Click(object sender, EventArgs e)
         {
-            EmailService.SendEmailByOrderCollection(_orderCollection);
+            /*OrderCollection oc = new OrderCollection();
+            for (int i = 0; i <= 2; i++)
+            {
+                Order o1 = new Order();
+                o1.Email = "5ktg4qglw5598s3@marketplace.amazon.com";
+                o1.OrderId = "103-7133341-8905855";
+                o1.Item.ASIN = "B071K61DCV";
+                o1.Name = "xiegeyang";
+                o1.Item.Title = "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy";
+                Order o2 = new Order();
+                o2.Email = "36z6hknvyxppdz7@marketplace.amazon.com";
+                o2.OrderId = "114-7759912-3893010";
+                o2.Item.ASIN = "B0746B61V6";
+                o2.Name = "fangkaiyun";
+                o2.Item.Title = "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy";
+                oc.Add(o1);
+                oc.Add(o2);
+            }*/
+
+            EmailService.SendEmailByOrderCollection(_serviceCliamDefinition, _orderCollection, xmlTextBox);
         }
 
         private void emailContextToolStripMenuItem_Click(object sender, EventArgs e)

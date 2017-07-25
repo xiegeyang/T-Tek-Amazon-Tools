@@ -44,8 +44,10 @@ namespace MarketplaceWebServiceOrders
                 if (!buyerEmail.Equals(String.Empty))
                 {
                     DataExchangeService.Order orderDetail = GetDetailOrder(serviceCliamDefinition, orderId, buyerEmail, name);
-                    orderCollection.Add(orderDetail);
-
+                    if (orderDetail != null)
+                    {
+                        orderCollection.Add(orderDetail);
+                    }
                 }
             }
             return orderCollection;
@@ -58,7 +60,16 @@ namespace MarketplaceWebServiceOrders
             orderDetail.Email = buyerEmail;
             orderDetail.Name = name;
             XmlDocument xOrder = GetListOrderItemsXmlData(serviceCliamDefinition, orderId);
-            orderDetail.Item.ASIN = xOrder.GetElementsByTagName("ASIN")[0].InnerText;
+            string ASIN = xOrder.GetElementsByTagName("ASIN")[0].InnerText;
+
+            if (!(ASIN.Equals("B071K61DCV") || ASIN.Equals("B071W2F29J") || ASIN.Equals("B071WV3CSF") || ASIN.Equals("B071ZHKNKH") ||
+                ASIN.Equals("B072K2T1TN") || ASIN.Equals("B0723CV3HT") || ASIN.Equals("B0739M71H8") || ASIN.Equals("B0746B61V6") ||
+                ASIN.Equals("B07176P1VR")))
+            {
+                return null;
+            }
+
+            orderDetail.Item.ASIN = ASIN;
             orderDetail.Item.Title = xOrder.GetElementsByTagName("Title")[0].InnerText;
             return orderDetail;
         }
