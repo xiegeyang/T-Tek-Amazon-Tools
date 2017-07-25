@@ -1,25 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataExchangeService;
 
 namespace TTekSmartUI
 {
     public partial class EmailContextView : Form
     {
-        public EmailContextView()
+
+        private ServiceCliamDefinition _serviceCliamDefinition;
+        public EmailContextView(ServiceCliamDefinition serviceCliamDefinition)
         {
+            this._serviceCliamDefinition = serviceCliamDefinition;
             InitializeComponent();
         }
 
         private void saveContextButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void sendSampleButton_Click(object sender, EventArgs e)
+        {
+            if (toEmailAddressTextBox.Equals(String.Empty))
+            {
+                return;
+            }
+
+            EmailService.SendEmailByCustomizeEmail(toEmailAddressTextBox.Text, subjectTextBox.Text, bodyTextBox.Text);
         }
     }
 }
