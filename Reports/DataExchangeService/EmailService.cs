@@ -2,48 +2,22 @@
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Windows.Forms;
 
 namespace DataExchangeService
 {
     public class EmailService
     {
-        private const string _htmlLogo = "<img src=\"https://github.com/xiegeyang/T-Tek-Amazon-Tools/blob/master/Reports/TTekSmartUI/bin/Debug/logo.jpg?raw=true\" height=\"100\" width=\"400\" />";
-        private const string _htmlMainBody =
-            "<br /><br />"
-            + "<p><b>Dear Customer,</b>"
-            + "<br /><br />"
-            + "Thank you for puchasing T-Tek products on Amazon.com. We strive to offer you the best value and service possible."
-            + "<br /><br />"
-            + "<b>Got 2 minutes?</b>"
-            + "<br />"
-            + "<table>"
-            + "<tr>"
-            + "<td>Please leave your product review here:</td>"
-            + "<td><a href=\"https://www.amazon.com/review/create-review?asin={0}#\"><img src=\"https://raw.githubusercontent.com/xiegeyang/T-Tek-Amazon-Tools/master/Reports/TTekSmartUI/bin/Debug/reviewstar.png\" height=\"50\" width=\"172\" /></a></td>"
-            + "</tr>"
-            + "</table>"
-            + "<br /><br />"
-            + "<table>"
-            + "<tr>"
-            + "<td><img src=\"https://github.com/xiegeyang/T-Tek-Amazon-Tools/blob/master/Reports/TTekSmartUI/bin/Debug/fidgetcube.jpg?raw=true\" height=\"150\" width=\"150\" style=\"float:left\" /></td>"
-            + "<td></td><td></td><td></td>"
-            + "<td>{1}</td>"
-            + "</tr>"
-            + "</table>"
-            + "<br /><br />"
-            + "If you have any issues with your purchase, please contact us first before leaving the review. We're happy to help!"
-            + "<br /><br />"
-            + "<a href=\"https://www.amazon.com/ss/help/contact/?_encoding=UTF8&orderID={2}&sellerID={3}\">Contact Seller</a>"
-            + "<br /><br />"
-            + "Sincerely, <br />"
-            + "Customer Support Team <br />"
-            + "T-Tek Customer Support <br /></p>";
+
+        private const string _sellerId = "A380610PV1XE6A";
 
 
 
 
-        public static void SendEmailByOrderCollection(OrderCollection orderCollection)
+
+        public static void SendEmailByOrderCollection(ServiceCliamDefinition serviceCliamDefinition, OrderCollection orderCollection, TextBox textBox)
         {
+            textBox.Text = String.Empty;
             EmailContextInformation emailContextInformation = new EmailContextInformation();
             MailAddress fromAddress = new MailAddress(emailContextInformation.EmailAddress, "T-Tek Product Team");
 
@@ -57,29 +31,36 @@ namespace DataExchangeService
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
+                Timeout = 3000
             };
 
             foreach (Order order in orderCollection)
             {
-                MailAddress toAddress = new MailAddress("5ktg4qglw5598s3@marketplace.amazon.com", "Customer");
-                string subject = String.Format(emailContextInformation.Subject, order.Item.Title);
-                string body = String.Format(emailContextInformation.Body, order.Item.ASIN);
+                textBox.Text += String.Format("Sending email to {0}...\n", order.Email);
+                MailAddress toAddress = new MailAddress(order.Email);
+                string subject = emailContextInformation.GetEmailSubjectContext(order);
+                string body = emailContextInformation.GetEmailBodyContext(serviceCliamDefinition, order);
+                AlternateView avHtml = AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html);
+
                 using (var message = new MailMessage(fromAddress, toAddress)
                 {
                     Subject = subject,
-                    Body = body
                 })
                 {
+                    message.AlternateViews.Add(avHtml);
+                    message.IsBodyHtml = true;
                     smtp.Send(message);
+
                 }
+                textBox.Text += String.Format("Success!\n");
             }
 
 
         }
 
 
-        public static void SendEmailByCustomizeEmail(string toEmailAddress, string emailSubject, string emailBody)
+        public static void SendEmailByCustomizeEmail(ServiceCliamDefinition serviceCliamDefinition, string toEmailAddress, string emailSubject, string emailBody)
         {
             EmailContextInformation emailContextInformation = new EmailContextInformation();
             MailAddress fromAddress = new MailAddress(emailContextInformation.EmailAddress, "T-Tek Product Team");
@@ -87,16 +68,10 @@ namespace DataExchangeService
             string subject = String.Format(emailSubject, "xiegeyang");
 
             string fromPassword = emailContextInformation.Password;
+            string mainBody = String.Format(emailBody, "B06W2HZQ86", "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy", "103-7133341-8905855", serviceCliamDefinition.SellerId);
 
 
-
-            string headerLogo = String.Format(_htmlLogo);
-
-
-            string mainBody = String.Format(_htmlMainBody, "B06W2HZQ86", "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy", "103-7133341-8905855", "A380610PV1XE6A");
-
-            string htmlBody = headerLogo + mainBody;
-            AlternateView avHtml = AlternateView.CreateAlternateViewFromString(htmlBody, null, MediaTypeNames.Text.Html);
+            AlternateView avHtml = AlternateView.CreateAlternateViewFromString(mainBody, null, MediaTypeNames.Text.Html);
 
 
             var smtp = new SmtpClient
