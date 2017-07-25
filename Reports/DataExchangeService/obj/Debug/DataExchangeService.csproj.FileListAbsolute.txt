@@ -2,4 +2,3 @@ D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\DataExchange
 D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\DataExchangeService\bin\Debug\DataExchangeService.pdb
 D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\DataExchangeService\obj\Debug\DataExchangeService.dll
 D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\DataExchangeService\obj\Debug\DataExchangeService.pdb
-D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\DataExchangeService\obj\Debug\DataExchangeService.csprojResolveAssemblyReference.cache
