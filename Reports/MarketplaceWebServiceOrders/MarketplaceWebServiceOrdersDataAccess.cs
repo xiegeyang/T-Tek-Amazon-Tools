@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Xml;
 using DataExchangeService;
 using MarketplaceWebServiceOrders.Model;
@@ -82,6 +83,7 @@ namespace MarketplaceWebServiceOrders
             string orderResponesXML = OrderResponse.ToXML();
             XmlDocument xOrderList = new XmlDocument();
             xOrderList.LoadXml(orderResponesXML);
+            Thread.Sleep(2000);
             return xOrderList;
         }
 
