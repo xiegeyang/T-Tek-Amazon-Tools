@@ -9,7 +9,6 @@ namespace DataExchangeService
     public class EmailService
     {
 
-        private const string _sellerId = "A380610PV1XE6A";
 
 
 
@@ -52,8 +51,9 @@ namespace DataExchangeService
                     message.IsBodyHtml = true;
                     smtp.Send(message);
 
+                    textBox.Text += String.Format("Success!\n");
                 }
-                textBox.Text += String.Format("Success!\n");
+
             }
 
 

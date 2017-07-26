@@ -31,14 +31,21 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emailContextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getOrdersListButton = new System.Windows.Forms.Button();
             this.createdAfterDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.xmlTextBox = new System.Windows.Forms.TextBox();
             this.sendEmailsButton = new System.Windows.Forms.Button();
             this.createdBeforeDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emailContextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordersDataGridView = new System.Windows.Forms.DataGridView();
+            this.orderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ASIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -67,6 +74,21 @@
             this.logInToolStripMenuItem.Text = "Log In";
             this.logInToolStripMenuItem.Click += new System.EventHandler(this.LogInToolStripMenuItem_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.emailContextToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // emailContextToolStripMenuItem
+            // 
+            this.emailContextToolStripMenuItem.Name = "emailContextToolStripMenuItem";
+            this.emailContextToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.emailContextToolStripMenuItem.Text = "Email Context";
+            this.emailContextToolStripMenuItem.Click += new System.EventHandler(this.emailContextToolStripMenuItem_Click);
+            // 
             // getOrdersListButton
             // 
             this.getOrdersListButton.Location = new System.Drawing.Point(38, 145);
@@ -87,22 +109,22 @@
             // 
             // xmlTextBox
             // 
-            this.xmlTextBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.xmlTextBox.Location = new System.Drawing.Point(763, 24);
+            this.xmlTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.xmlTextBox.Location = new System.Drawing.Point(0, 500);
             this.xmlTextBox.Multiline = true;
             this.xmlTextBox.Name = "xmlTextBox";
-            this.xmlTextBox.Size = new System.Drawing.Size(482, 569);
+            this.xmlTextBox.Size = new System.Drawing.Size(1245, 93);
             this.xmlTextBox.TabIndex = 4;
             // 
             // sendEmailsButton
             // 
+            this.sendEmailsButton.Enabled = false;
             this.sendEmailsButton.Location = new System.Drawing.Point(163, 145);
             this.sendEmailsButton.Name = "sendEmailsButton";
             this.sendEmailsButton.Size = new System.Drawing.Size(75, 23);
             this.sendEmailsButton.TabIndex = 5;
             this.sendEmailsButton.Text = "Send Email";
             this.sendEmailsButton.UseVisualStyleBackColor = true;
-            this.sendEmailsButton.Enabled = false;
             this.sendEmailsButton.Click += new System.EventHandler(this.sendEmailsButton_Click);
             // 
             // createdBeforeDateTimePicker
@@ -113,26 +135,56 @@
             this.createdBeforeDateTimePicker.TabIndex = 6;
             this.createdBeforeDateTimePicker.ValueChanged += new System.EventHandler(this.createdBeforeDateTimePicker_ValueChanged);
             // 
-            // editToolStripMenuItem
+            // ordersDataGridView
             // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.emailContextToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.ordersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ordersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.orderId,
+            this.customerName,
+            this.email,
+            this.ASIN,
+            this.itemTitle});
+            this.ordersDataGridView.Location = new System.Drawing.Point(681, 27);
+            this.ordersDataGridView.Name = "ordersDataGridView";
+            this.ordersDataGridView.Size = new System.Drawing.Size(564, 470);
+            this.ordersDataGridView.TabIndex = 7;
             // 
-            // emailContextToolStripMenuItem
+            // orderId
             // 
-            this.emailContextToolStripMenuItem.Name = "emailContextToolStripMenuItem";
-            this.emailContextToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.emailContextToolStripMenuItem.Text = "Email Context";
-            this.emailContextToolStripMenuItem.Click += new System.EventHandler(this.emailContextToolStripMenuItem_Click);
+            this.orderId.HeaderText = "Order Id";
+            this.orderId.Name = "orderId";
+            this.orderId.ReadOnly = true;
+            // 
+            // customerName
+            // 
+            this.customerName.HeaderText = "Customer Name";
+            this.customerName.Name = "customerName";
+            this.customerName.ReadOnly = true;
+            // 
+            // email
+            // 
+            this.email.HeaderText = "Email";
+            this.email.Name = "email";
+            this.email.ReadOnly = true;
+            // 
+            // ASIN
+            // 
+            this.ASIN.HeaderText = "ASIN";
+            this.ASIN.Name = "ASIN";
+            this.ASIN.ReadOnly = true;
+            // 
+            // itemTitle
+            // 
+            this.itemTitle.HeaderText = "Item Title";
+            this.itemTitle.Name = "itemTitle";
+            this.itemTitle.ReadOnly = true;
             // 
             // MainUIView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1245, 593);
+            this.Controls.Add(this.ordersDataGridView);
             this.Controls.Add(this.createdBeforeDateTimePicker);
             this.Controls.Add(this.sendEmailsButton);
             this.Controls.Add(this.xmlTextBox);
@@ -144,6 +196,7 @@
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,6 +214,12 @@
         private System.Windows.Forms.DateTimePicker createdBeforeDateTimePicker;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem emailContextToolStripMenuItem;
+        private System.Windows.Forms.DataGridView ordersDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orderId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ASIN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemTitle;
     }
 }
 

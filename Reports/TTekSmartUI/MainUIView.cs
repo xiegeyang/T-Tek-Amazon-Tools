@@ -45,6 +45,7 @@ namespace TTekSmartUI
             {
                 xmlTextBox.Text += "   \n" + order.OrderId + "  " + order.Email + "   " + order.Item.ASIN + "   " + order.Item.Title + "   "
                     + order.Name;
+                ordersDataGridView.Rows.Add(order.OrderId, order.Name, order.Email, order.Item.ASIN, order.Item.Title);
             }
             sendEmailsButton.Enabled = true;
             MessageBox.Show("OK!");
@@ -52,7 +53,7 @@ namespace TTekSmartUI
 
         private void sendEmailsButton_Click(object sender, EventArgs e)
         {
-            /*OrderCollection oc = new OrderCollection();
+            OrderCollection oc = new OrderCollection();
             for (int i = 0; i <= 2; i++)
             {
                 Order o1 = new Order();
@@ -69,9 +70,9 @@ namespace TTekSmartUI
                 o2.Item.Title = "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy";
                 oc.Add(o1);
                 oc.Add(o2);
-            }*/
+            }
 
-            EmailService.SendEmailByOrderCollection(_serviceCliamDefinition, _orderCollection, xmlTextBox);
+            EmailService.SendEmailByOrderCollection(_serviceCliamDefinition, oc, xmlTextBox);
         }
 
         private void emailContextToolStripMenuItem_Click(object sender, EventArgs e)

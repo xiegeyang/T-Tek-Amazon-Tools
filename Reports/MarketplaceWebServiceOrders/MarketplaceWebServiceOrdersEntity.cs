@@ -144,62 +144,22 @@ namespace MarketplaceWebServiceOrders
             List<string> marketplaceId = new List<string>();
             marketplaceId.Add(serviceCliamDefinition.MarketplaceId);
             request.MarketplaceId = marketplaceId;
-
+            request.MaxResultsPerPage = 100;
 
 
             return GetClient(serviceCliamDefinition).ListOrders(request);
         }
 
-        public static ListOrdersResponse InvokeListOrders(ServiceCliamDefinition serviceCliamDefinition)
-        {
-            // Create a request.
-            ListOrdersRequest request = new ListOrdersRequest();
-
-            request.SellerId = serviceCliamDefinition.SellerId;
-
-
-            request.MWSAuthToken = serviceCliamDefinition.AuthToken;
-            DateTime createdAfter = new DateTime(2017, 7, 19);
-            request.CreatedAfter = createdAfter;
-            /*DateTime createdBefore = new DateTime();
-            request.CreatedBefore = createdBefore;
-            DateTime lastUpdatedAfter = new DateTime();
-            request.LastUpdatedAfter = lastUpdatedAfter;
-            DateTime lastUpdatedBefore = new DateTime();
-            request.LastUpdatedBefore = lastUpdatedBefore;
-            List<string> orderStatus = new List<string>();
-            request.OrderStatus = orderStatus;*/
-            List<string> marketplaceId = new List<string>();
-            marketplaceId.Add("ATVPDKIKX0DER");
-            request.MarketplaceId = marketplaceId;
-            /*List<string> fulfillmentChannel = new List<string>();
-            request.FulfillmentChannel = fulfillmentChannel;
-            List<string> paymentMethod = new List<string>();
-            request.PaymentMethod = paymentMethod;
-            string buyerEmail = "example";
-            request.BuyerEmail = buyerEmail;
-            string sellerOrderId = "example";
-            request.SellerOrderId = sellerOrderId;
-            decimal maxResultsPerPage = 1;
-            request.MaxResultsPerPage = maxResultsPerPage;
-            List<string> tfmShipmentStatus = new List<string>();
-            request.TFMShipmentStatus = tfmShipmentStatus;*/
-            return GetClient(serviceCliamDefinition).ListOrders(request);
-        }
-
-        public ListOrdersByNextTokenResponse InvokeListOrdersByNextToken()
+        public static ListOrdersByNextTokenResponse InvokeListOrdersByNextToken(ServiceCliamDefinition serviceCliamDefinition, string nextToken)
         {
             // Create a request.
             ListOrdersByNextTokenRequest request = new ListOrdersByNextTokenRequest();
-            string sellerId = "example";
-            request.SellerId = sellerId;
-            string mwsAuthToken = "example";
-            request.MWSAuthToken = mwsAuthToken;
-            string nextToken = "example";
+            request.SellerId = serviceCliamDefinition.SellerId;
+            request.MWSAuthToken = serviceCliamDefinition.AuthToken;
             request.NextToken = nextToken;
             return client.ListOrdersByNextToken(request);
         }
 
-        
+
     }
 }
