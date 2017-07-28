@@ -1,9 +1,11 @@
-﻿namespace DataExchangeService
+﻿using System;
+
+namespace DataExchangeService
 {
     public class Order
     {
         private Item _item = null;
-
+        private DateTime _purchaseDate;
         public string Email
         {
             get;
@@ -31,6 +33,28 @@
                     _item = new Item();
                 }
                 return _item;
+            }
+        }
+
+        public float Amount
+        {
+            get;
+            set;
+        }
+
+        public DateTime PurchaseDate
+        {
+            get
+            {
+                if (_purchaseDate < Convert.ToDateTime("1,1,2000"))
+                {
+                    PurchaseDate = DateTime.MaxValue;
+                }
+                return _purchaseDate;
+            }
+            set
+            {
+                _purchaseDate = value;
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DataExchangeService;
-using MarketplaceWebServiceOrders;
+using DataExchangeService.Orders;
 
 namespace TTekSmartUI
 {
@@ -37,9 +37,9 @@ namespace TTekSmartUI
             _createdBeforeDateTime = createdBeforeDateTimePicker.Value;
         }
 
-        private void getOrdersListButton_Click(object sender, System.EventArgs e)
+        private void InvokeOrdersListButton_Click(object sender, System.EventArgs e)
         {
-            _orderCollection = MarketplaceWebServiceOrdersDataAccess.InvokeListOrdersDetailByDateTime(_serviceCliamDefinition, _createdAfterDateTime, _createdBeforeDateTime);
+            /*_orderCollection = MarketplaceWebServiceOrdersDataAccess.InvokeListOrdersDetailByDateTime(_serviceCliamDefinition, _createdAfterDateTime, _createdBeforeDateTime);
 
             foreach (Order order in _orderCollection)
             {
@@ -47,7 +47,31 @@ namespace TTekSmartUI
                     + order.Name;
                 ordersDataGridView.Rows.Add(order.OrderId, order.Name, order.Email, order.Item.ASIN, order.Item.Title);
             }
-            sendEmailsButton.Enabled = true;
+            sendEmailsButton.Enabled = true;*/
+
+            //xmlTextBox.Text = MarketplaceWebServiceOrdersDataAccess.getListOrdersByDateTimeXmlData(_serviceCliamDefinition, _createdAfterDateTime, _createdBeforeDateTime).OuterXml;
+            //MarketplaceWebServiceOrdersDataAccess.GetDetailOrder(_serviceCliamDefinition, "111-4474566-7809040", "", "", xmlTextBox);
+
+            OrderCollection oc = new OrderCollection();
+
+
+            Order o1 = new Order();
+            o1.Email = "5ktg4qglw5598s3@marketplace.amazon.com";
+            o1.OrderId = "103-7133341-8905854";
+            o1.Item.ASIN = "B071K61DCV";
+            o1.Name = "xiegeyang";
+            o1.Item.Title = "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy";
+            Order o2 = new Order();
+            o2.Email = "36z6hknvyxppdz7@marketplace.amazon.com";
+            o2.OrderId = "114-7759912-3893011";
+            o2.Item.ASIN = "B0746B61V6";
+            o2.Name = "fangkaiyun";
+            o2.Item.Title = "T-Tek Product Cube Relieves Stress And Anxiety for Children and Adults Anxiety Attention Toy";
+            oc.Add(o1);
+            oc.Add(o2);
+
+
+            OrdersDataRecordAccess.saveOrderCollection(oc);
             MessageBox.Show("OK!");
         }
 
@@ -81,6 +105,17 @@ namespace TTekSmartUI
             emailContextView.ShowDialog();
         }
 
-
+        private void getOrdersButton_Click(object sender, EventArgs e)
+        {
+            _orderCollection = OrdersDataRecordAccess.GetOrderCollection();
+            foreach (Order order in _orderCollection)
+            {
+                xmlTextBox.Text += "   \n" + order.OrderId + "  " + order.Email + "   " + order.Item.ASIN + "   " + order.Item.Title + "   "
+                    + order.Name;
+                ordersDataGridView.Rows.Add(order.OrderId, order.Name, order.Email, order.Item.ASIN, order.Item.Title);
+            }
+            sendEmailsButton.Enabled = true;
+            MessageBox.Show("OK!");
+        }
     }
 }
