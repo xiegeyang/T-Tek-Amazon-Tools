@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Windows.Forms;
 using System.Xml;
 using DataExchangeService;
 using MarketplaceWebServiceOrders.Model;
@@ -44,7 +45,7 @@ namespace MarketplaceWebServiceOrders
                 }
                 if (!buyerEmail.Equals(String.Empty))
                 {
-                    DataExchangeService.Order orderDetail = GetDetailOrder(serviceCliamDefinition, orderId, buyerEmail, name);
+                    DataExchangeService.Order orderDetail = GetDetailOrder(serviceCliamDefinition, orderId, buyerEmail, name, new TextBox());
                     if (orderDetail != null)
                     {
                         orderCollection.Add(orderDetail);
@@ -54,13 +55,14 @@ namespace MarketplaceWebServiceOrders
             return orderCollection;
         }
 
-        private static DataExchangeService.Order GetDetailOrder(ServiceCliamDefinition serviceCliamDefinition, string orderId, string buyerEmail, string name)
+        public static DataExchangeService.Order GetDetailOrder(ServiceCliamDefinition serviceCliamDefinition, string orderId, string buyerEmail, string name, TextBox textBox)
         {
             DataExchangeService.Order orderDetail = new DataExchangeService.Order();
             orderDetail.OrderId = orderId;
             orderDetail.Email = buyerEmail;
             orderDetail.Name = name;
             XmlDocument xOrder = GetListOrderItemsXmlData(serviceCliamDefinition, orderId);
+            textBox.Text = xOrder.OuterXml;
             string ASIN = xOrder.GetElementsByTagName("ASIN")[0].InnerText;
 
             if (!(ASIN.Equals("B071K61DCV") || ASIN.Equals("B071W2F29J") || ASIN.Equals("B071WV3CSF") || ASIN.Equals("B071ZHKNKH") ||
@@ -87,7 +89,7 @@ namespace MarketplaceWebServiceOrders
             return xOrderList;
         }
 
-        private static XmlDocument getListOrdersByDateTimeXmlData(ServiceCliamDefinition serviceCliamDefinition, DateTime createdAfterDateTime, DateTime createdBeforeDateTime)
+        public static XmlDocument getListOrdersByDateTimeXmlData(ServiceCliamDefinition serviceCliamDefinition, DateTime createdAfterDateTime, DateTime createdBeforeDateTime)
         {
             IMWSResponse listOrdersResponse = null;
             listOrdersResponse = MarketplaceWebServiceOrdersEntity.InvokeListOrdersByDateTime(serviceCliamDefinition, createdAfterDateTime, createdBeforeDateTime);

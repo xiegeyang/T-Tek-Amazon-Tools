@@ -33,7 +33,7 @@
             this.logInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emailContextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getOrdersListButton = new System.Windows.Forms.Button();
+            this.InvokeOrdersListButton = new System.Windows.Forms.Button();
             this.createdAfterDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.xmlTextBox = new System.Windows.Forms.TextBox();
             this.sendEmailsButton = new System.Windows.Forms.Button();
@@ -44,6 +44,7 @@
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ASIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.getOrdersButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -89,15 +90,15 @@
             this.emailContextToolStripMenuItem.Text = "Email Context";
             this.emailContextToolStripMenuItem.Click += new System.EventHandler(this.emailContextToolStripMenuItem_Click);
             // 
-            // getOrdersListButton
+            // InvokeOrdersListButton
             // 
-            this.getOrdersListButton.Location = new System.Drawing.Point(38, 145);
-            this.getOrdersListButton.Name = "getOrdersListButton";
-            this.getOrdersListButton.Size = new System.Drawing.Size(75, 23);
-            this.getOrdersListButton.TabIndex = 1;
-            this.getOrdersListButton.Text = "Get Orders";
-            this.getOrdersListButton.UseVisualStyleBackColor = true;
-            this.getOrdersListButton.Click += new System.EventHandler(this.getOrdersListButton_Click);
+            this.InvokeOrdersListButton.Location = new System.Drawing.Point(38, 145);
+            this.InvokeOrdersListButton.Name = "InvokeOrdersListButton";
+            this.InvokeOrdersListButton.Size = new System.Drawing.Size(200, 23);
+            this.InvokeOrdersListButton.TabIndex = 1;
+            this.InvokeOrdersListButton.Text = "Invoke Orders From MWS";
+            this.InvokeOrdersListButton.UseVisualStyleBackColor = true;
+            this.InvokeOrdersListButton.Click += new System.EventHandler(this.InvokeOrdersListButton_Click);
             // 
             // createdAfterDateTimePicker
             // 
@@ -119,7 +120,7 @@
             // sendEmailsButton
             // 
             this.sendEmailsButton.Enabled = false;
-            this.sendEmailsButton.Location = new System.Drawing.Point(163, 145);
+            this.sendEmailsButton.Location = new System.Drawing.Point(38, 174);
             this.sendEmailsButton.Name = "sendEmailsButton";
             this.sendEmailsButton.Size = new System.Drawing.Size(75, 23);
             this.sendEmailsButton.TabIndex = 5;
@@ -179,17 +180,28 @@
             this.itemTitle.Name = "itemTitle";
             this.itemTitle.ReadOnly = true;
             // 
+            // getOrdersButton
+            // 
+            this.getOrdersButton.Location = new System.Drawing.Point(38, 203);
+            this.getOrdersButton.Name = "getOrdersButton";
+            this.getOrdersButton.Size = new System.Drawing.Size(200, 23);
+            this.getOrdersButton.TabIndex = 8;
+            this.getOrdersButton.Text = "Get Orders From Database";
+            this.getOrdersButton.UseVisualStyleBackColor = true;
+            this.getOrdersButton.Click += new System.EventHandler(this.getOrdersButton_Click);
+            // 
             // MainUIView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1245, 593);
+            this.Controls.Add(this.getOrdersButton);
             this.Controls.Add(this.ordersDataGridView);
             this.Controls.Add(this.createdBeforeDateTimePicker);
             this.Controls.Add(this.sendEmailsButton);
             this.Controls.Add(this.xmlTextBox);
             this.Controls.Add(this.createdAfterDateTimePicker);
-            this.Controls.Add(this.getOrdersListButton);
+            this.Controls.Add(this.InvokeOrdersListButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainUIView";
@@ -207,7 +219,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logInToolStripMenuItem;
-        private System.Windows.Forms.Button getOrdersListButton;
+        private System.Windows.Forms.Button InvokeOrdersListButton;
         private System.Windows.Forms.DateTimePicker createdAfterDateTimePicker;
         private System.Windows.Forms.TextBox xmlTextBox;
         private System.Windows.Forms.Button sendEmailsButton;
@@ -220,6 +232,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn ASIN;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemTitle;
+        private System.Windows.Forms.Button getOrdersButton;
     }
 }
 
