@@ -84,16 +84,17 @@ namespace DataExchangeService.Orders
                 order.Name = (string)reader.GetValue(3);
                 order.Email = (string)reader.GetValue(1);
                 order.OrderId = (string)reader.GetValue(0);
-                order.Amount = (float)reader.GetValue(4);
+                order.Amount = (float)Convert.ToDouble(reader.GetValue(4));
                 order.Item.ASIN = (string)reader.GetValue(2);
                 order.Item.Title = (string)reader.GetValue(5);
+                order.PurchaseDate = (DateTime)reader.GetValue(6);
                 orderCollection.Add(order);
             }
         }
 
         private static string GetOrderCollectionStatment()
         {
-            return "SELECT orderId, emailAddress, asin, customerName, amount, itemTitle"
+            return "SELECT orderId, emailAddress, asin, customerName, amount, itemTitle, purchaseDate"
                 + " FROM Order_Master";
         }
     }
