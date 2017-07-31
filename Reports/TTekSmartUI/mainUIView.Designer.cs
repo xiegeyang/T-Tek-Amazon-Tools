@@ -1,4 +1,6 @@
-﻿namespace TTekSmartUI
+﻿using System.Windows.Forms;
+
+namespace TTekSmartUI
 {
     partial class MainUIView
     {
@@ -45,6 +47,7 @@
             this.ASIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.getOrdersButton = new System.Windows.Forms.Button();
+            this.invokeOrdersByNextDateButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -190,11 +193,22 @@
             this.getOrdersButton.UseVisualStyleBackColor = true;
             this.getOrdersButton.Click += new System.EventHandler(this.getOrdersButton_Click);
             // 
+            // invokeOrdersByNextDateButton
+            // 
+            this.invokeOrdersByNextDateButton.Location = new System.Drawing.Point(38, 232);
+            this.invokeOrdersByNextDateButton.Name = "invokeOrdersByNextDateButton";
+            this.invokeOrdersByNextDateButton.Size = new System.Drawing.Size(200, 23);
+            this.invokeOrdersByNextDateButton.TabIndex = 9;
+            this.invokeOrdersByNextDateButton.Text = "Invoke Order By Next Date";
+            this.invokeOrdersByNextDateButton.UseVisualStyleBackColor = true;
+            this.invokeOrdersByNextDateButton.Click += new System.EventHandler(this.invokeOrdersByNextDateButton_Click);
+            // 
             // MainUIView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1245, 593);
+            this.Controls.Add(this.invokeOrdersByNextDateButton);
             this.Controls.Add(this.getOrdersButton);
             this.Controls.Add(this.ordersDataGridView);
             this.Controls.Add(this.createdBeforeDateTimePicker);
@@ -206,6 +220,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainUIView";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainUIView_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).EndInit();
@@ -233,6 +248,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ASIN;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemTitle;
         private System.Windows.Forms.Button getOrdersButton;
+        private Button invokeOrdersByNextDateButton;
     }
 }
 

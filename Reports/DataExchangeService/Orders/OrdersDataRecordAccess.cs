@@ -6,44 +6,36 @@ namespace DataExchangeService.Orders
 {
     public class OrdersDataRecordAccess
     {
-        public static void saveOrderCollection(OrderCollection orderCollection)
+        public static void saveOrderCollection(ServiceCliamDefinition serviceCliamDefinition, OrderCollection orderCollection)
         {
             string statment = GetsaveOrderCollectionStatment(orderCollection);
             using (DataAccess dataAccess = new DataAccess())
             {
-                ExecuteSaveOrderCollectionStatment(dataAccess, statment, orderCollection);
+                ExecuteSaveOrderCollectionStatment(serviceCliamDefinition, dataAccess, statment, orderCollection);
             }
 
         }
 
-        private static void ExecuteSaveOrderCollectionStatment(DataAccess dataAccess, string statment, OrderCollection orderCollection)
+        private static void ExecuteSaveOrderCollectionStatment(ServiceCliamDefinition serviceCliamDefinition, DataAccess dataAccess, string statment, OrderCollection orderCollection)
         {
-            try
+            foreach (Order order in orderCollection)
             {
-
-
-                foreach (Order order in orderCollection)
+                using (SqlCommand command = new SqlCommand())
                 {
-                    using (SqlCommand command = new SqlCommand())
-                    {
-                        command.CommandText = statment;
-                        command.CommandType = CommandType.Text;
-                        command.Connection = dataAccess.Connection;
-                        command.Parameters.Add("@orderID", order.OrderId);
-                        command.Parameters.Add("@emailAddress", order.Email);
-                        command.Parameters.Add("@asin", order.Item.ASIN);
-                        command.Parameters.Add("@customerName", order.Name);
-                        command.Parameters.Add("@amount", order.Amount);
-                        command.Parameters.Add("@itemTitle", order.Item.Title);
-                        command.Parameters.Add("@purchaseDate", order.PurchaseDate);
-                        command.ExecuteNonQuery();
-                    }
+                    command.CommandText = statment;
+                    command.CommandType = CommandType.Text;
+                    command.Connection = dataAccess.Connection;
+                    command.Parameters.AddWithValue("@orderID", order.OrderId);
+                    command.Parameters.AddWithValue("@emailAddress", order.Email);
+                    command.Parameters.AddWithValue("@asin", order.Item.ASIN);
+                    command.Parameters.AddWithValue("@customerName", order.Name);
+                    command.Parameters.AddWithValue("@amount", order.Amount);
+                    command.Parameters.AddWithValue("@itemTitle", order.Item.Title);
+                    command.Parameters.AddWithValue("@purchaseDate", order.PurchaseDate);
+                    command.Parameters.AddWithValue("@sellerId", serviceCliamDefinition.SellerId);
+                    command.Parameters.AddWithValue("@emailStatus", 0);
+                    command.ExecuteNonQuery();
                 }
-
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
 
         }
@@ -51,29 +43,30 @@ namespace DataExchangeService.Orders
         private static string GetsaveOrderCollectionStatment(OrderCollection orderCollection)
         {
             string statment = "INSERT INTO Order_Master"
-                + " (orderId, emailAddress, asin, customerName, amount, itemTitle, purchaseDate)"
+                + " (orderId, emailAddress, asin, customerName, amount, itemTitle, purchaseDate, sellerId, emailStatus)"
                 + " VALUES"
-                + " (@orderID, @emailAddress, @asin, @customerName, @amount, @itemTitle, @purchaseDate)";
+                + " (@orderID, @emailAddress, @asin, @customerName, @amount, @itemTitle, @purchaseDate, @sellerId, @emailStatus)";
             return statment;
         }
 
-        public static OrderCollection GetOrderCollection()
+        public static OrderCollection GetOrderCollection(ServiceCliamDefinition serviceCliamDefinition)
         {
             OrderCollection orderCollection = new OrderCollection();
             string statment = GetOrderCollectionStatment();
             using (DataAccess dataAccess = new DataAccess())
             {
-                ExecuteGetOrderCollentionStatment(dataAccess, statment, orderCollection);
+                ExecuteGetOrderCollentionStatment(serviceCliamDefinition, dataAccess, statment, orderCollection);
             }
             return orderCollection;
 
         }
 
-        private static void ExecuteGetOrderCollentionStatment(DataAccess dataAccess, string statment, OrderCollection orderCollection)
+        private static void ExecuteGetOrderCollentionStatment(ServiceCliamDefinition serviceCliamDefinition, DataAccess dataAccess, string statment, OrderCollection orderCollection)
         {
             SqlCommand command = new SqlCommand();
             command.CommandText = statment;
             command.CommandType = CommandType.Text;
+            command.Parameters.Add("@sellerId", serviceCliamDefinition.SellerId);
             command.Connection = dataAccess.Connection;
 
             IDataReader reader = command.ExecuteReader();
@@ -95,7 +88,8 @@ namespace DataExchangeService.Orders
         private static string GetOrderCollectionStatment()
         {
             return "SELECT orderId, emailAddress, asin, customerName, amount, itemTitle, purchaseDate"
-                + " FROM Order_Master";
+                + " FROM Order_Master"
+                + " WHERE sellerId = @sellerId";
         }
     }
 }

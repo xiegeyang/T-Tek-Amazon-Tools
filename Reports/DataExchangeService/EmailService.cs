@@ -101,10 +101,5 @@ namespace DataExchangeService
 
         }
 
-        private string getImagePath(string ASIN)
-        {
-            string path = "< img src = \"{0}.jpg\" alt = \"Mountain View\" style = \"width:304px;height:228px;\" >";
-            return String.Format(path, ASIN);
-        }
     }
 }

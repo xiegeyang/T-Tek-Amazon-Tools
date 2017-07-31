@@ -16,3 +16,4 @@ D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\TTekSmartUI\
 D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\TTekSmartUI\obj\Debug\TTekSmartUI.exe
 D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\TTekSmartUI\obj\Debug\TTekSmartUI.pdb
 D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\TTekSmartUI\bin\Debug\MWSOrders_2013-09-01_v2017-02-22.dll
+D:\Documents\Visual Studio 2017\Projects\T-Tek Amazon Tools\Reports\TTekSmartUI\obj\Debug\TTekSmartUI.SetLastInvokeDateTimeView.resources

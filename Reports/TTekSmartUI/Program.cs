@@ -10,6 +10,7 @@ namespace TTekSmartUI
         private static string _sellerId = "A380610PV1XE6A";
         private static string _MWSAuthToken = "amzn.mws.76aeb40f-2625-ef1b-7942-f41976b59227";
 
+        private static string _developerId = "5743-5830-5903";
 
         // Developer AWS access key
         private static string _accessKey = "AKIAIKYYTE7TYRWSAIEA";
@@ -32,6 +33,7 @@ namespace TTekSmartUI
         static void Main()
         {
             ServiceCliamDefinition serviceCliamDefinition = new ServiceCliamDefinition(_sellerId, _MWSAuthToken, _accessKey, _secretKey, _marketplaceId);
+            serviceCliamDefinition.GetFromXml();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainUIView(serviceCliamDefinition));
