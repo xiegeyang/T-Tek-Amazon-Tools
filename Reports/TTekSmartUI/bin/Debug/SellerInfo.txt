@@ -1,0 +1,1 @@
+<SellerInfo><sellerId>A380610PV1XE6A</sellerId><authToken>amzn.mws.76aeb40f-2625-ef1b-7942-f41976b59227</authToken><lastInvokeDateTime>7/30/2017 10:04:51 PM</lastInvokeDateTime></SellerInfo>

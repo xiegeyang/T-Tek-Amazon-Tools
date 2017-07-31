@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Windows.Forms;
 using System.Xml;
 using DataExchangeService;
 using MarketplaceWebServiceOrders.Model;
@@ -9,43 +8,56 @@ namespace MarketplaceWebServiceOrders
 {
     public class MarketplaceWebServiceOrdersDataAccess
     {
+        public static OrderCollection InvokeListOrdersDetailByNextDate(ServiceCliamDefinition serviceCliamDefinition)
+        {
+            OrderCollection orderCollection = null;
+            try
+            {
+                if (serviceCliamDefinition != null)
+                {
+                    if (serviceCliamDefinition.LastInvokeDateTime == DateTime.MaxValue)
+                    {
+                        throw new TTekException("You do not have Last Invoke Date Time Value", ExceptionType.LastInvokeDateTimeNotSet);
+                    }
+                    DateTime createdBeforeDateTime = DateTime.Now.AddMinutes(-2);
+                    orderCollection = InvokeListOrdersDetailByDateTime(serviceCliamDefinition, serviceCliamDefinition.LastInvokeDateTime, createdBeforeDateTime);
+                    serviceCliamDefinition.LastInvokeDateTime = createdBeforeDateTime;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                orderCollection = new OrderCollection();
+                orderCollection.AddError(ex);
+            }
+            return orderCollection;
+
+        }
+
         public static OrderCollection InvokeListOrdersDetailByDateTime(ServiceCliamDefinition serviceCliamDefinition, DateTime createdAfterDateTime, DateTime createdBeforeDateTime)
         {
+            if (serviceCliamDefinition == null)
+            {
+                return new OrderCollection();
+            }
+
+
             OrderCollection orderCollection = new OrderCollection();
             XmlDocument xOrderList = getListOrdersByDateTimeXmlData(serviceCliamDefinition, createdAfterDateTime, createdBeforeDateTime);
+
             XmlNodeList orderList = xOrderList.GetElementsByTagName("Order");
 
             foreach (XmlNode order in orderList)
             {
-                string orderId = String.Empty;
-                string buyerEmail = String.Empty;
-                string name = String.Empty;
+                DataExchangeService.Order orderDetail = new DataExchangeService.Order();
 
                 foreach (XmlNode informationType in order)
                 {
-                    if (informationType.Name == "AmazonOrderId")
-                    {
-                        orderId = informationType.InnerText;
-                    }
-                    if (informationType.Name == "BuyerEmail")
-                    {
-                        buyerEmail = informationType.InnerText;
-                    }
-                    if (informationType.Name == "ShippingAddress")
-                    {
-                        foreach (XmlNode inforType in informationType)
-                        {
-                            if (inforType.Name == "Name")
-                            {
-                                name = inforType.InnerText;
-                            }
-                        }
-                    }
-
+                    GetBasicOrderInformation(informationType, orderDetail);
                 }
-                if (!buyerEmail.Equals(String.Empty))
+                if (orderDetail.Email != null && !orderDetail.Email.Equals(String.Empty))
                 {
-                    DataExchangeService.Order orderDetail = GetDetailOrder(serviceCliamDefinition, orderId, buyerEmail, name, new TextBox());
+                    GetDetailOrderInformation(serviceCliamDefinition, orderDetail);
                     if (orderDetail != null)
                     {
                         orderCollection.Add(orderDetail);
@@ -55,26 +67,53 @@ namespace MarketplaceWebServiceOrders
             return orderCollection;
         }
 
-        public static DataExchangeService.Order GetDetailOrder(ServiceCliamDefinition serviceCliamDefinition, string orderId, string buyerEmail, string name, TextBox textBox)
+        public static void GetBasicOrderInformation(XmlNode informationType, DataExchangeService.Order orderDetail)
         {
-            DataExchangeService.Order orderDetail = new DataExchangeService.Order();
-            orderDetail.OrderId = orderId;
-            orderDetail.Email = buyerEmail;
-            orderDetail.Name = name;
-            XmlDocument xOrder = GetListOrderItemsXmlData(serviceCliamDefinition, orderId);
-            textBox.Text = xOrder.OuterXml;
-            string ASIN = xOrder.GetElementsByTagName("ASIN")[0].InnerText;
 
-            if (!(ASIN.Equals("B071K61DCV") || ASIN.Equals("B071W2F29J") || ASIN.Equals("B071WV3CSF") || ASIN.Equals("B071ZHKNKH") ||
-                ASIN.Equals("B072K2T1TN") || ASIN.Equals("B0723CV3HT") || ASIN.Equals("B0739M71H8") || ASIN.Equals("B0746B61V6") ||
-                ASIN.Equals("B07176P1VR")))
+
+            if (informationType.Name == "AmazonOrderId")
             {
-                return null;
+                orderDetail.OrderId = informationType.InnerText;
             }
+            if (informationType.Name == "BuyerEmail")
+            {
+                orderDetail.Email = informationType.InnerText;
+            }
+            if (informationType.Name == "PurchaseDate")
+            {
+                orderDetail.PurchaseDate = DateTime.ParseExact(informationType.InnerText, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            if (informationType.Name == "ShippingAddress")
+            {
+                foreach (XmlNode inforType in informationType)
+                {
+                    if (inforType.Name == "Name")
+                    {
+                        orderDetail.Name = inforType.InnerText;
+                    }
+                }
+            }
+            if (informationType.Name == "OrderTotal")
+            {
+                foreach (XmlNode inforType in informationType)
+                {
+                    if (inforType.Name == "Amount")
+                    {
+                        orderDetail.Amount = (float)Convert.ToDouble(inforType.InnerText);
+                    }
+                }
+            }
+        }
+
+        public static void GetDetailOrderInformation(ServiceCliamDefinition serviceCliamDefinition, DataExchangeService.Order orderDetail)
+        {
+
+            XmlDocument xOrder = GetListOrderItemsXmlData(serviceCliamDefinition, orderDetail.OrderId);
+
+            string ASIN = xOrder.GetElementsByTagName("ASIN")[0].InnerText;
 
             orderDetail.Item.ASIN = ASIN;
             orderDetail.Item.Title = xOrder.GetElementsByTagName("Title")[0].InnerText;
-            return orderDetail;
         }
 
         private static XmlDocument GetListOrderItemsXmlData(ServiceCliamDefinition serviceCliamDefinition, string orderId)
